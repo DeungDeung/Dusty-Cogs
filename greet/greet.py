@@ -1,7 +1,6 @@
 import discord
 from redbot.core import Config
 from redbot.core import commands
-from redbot.core.utils import checks
 from __main__ import send_cmd_help
 from pathlib import Path
 import os
@@ -128,7 +127,7 @@ class Greet:
             temppath = os.path.join("data/greet/sounds", path_or_url)
             temppath = Path(temppath)
 
-        if ctx.message.author == user or checks.mod_or_permissions(mute_members=True):
+        if ctx.message.author == user :
             if not temppath.is_file():
                 self.bot.say("File does not exist! Make sure the file is in "
                              "the `data/greet/sounds` folder and you are "
@@ -159,7 +158,7 @@ class Greet:
                 self.settings[server.id][ctx.message.author.id] = [False, ""]
         if mode is None:
             return
-        if mode == "server" and checks.mod_or_permissions(mute_members=True):
+        if mode == "server":
             try:
                 self.settings[server.id]["ENABLED"] = not self.settings[server.id]["ENABLED"]
             except:
